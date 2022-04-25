@@ -1,0 +1,8 @@
+.home__bg {
+    background-color: red;
+    height: 92vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
