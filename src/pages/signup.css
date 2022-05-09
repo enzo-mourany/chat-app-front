@@ -1,0 +1,8 @@
+.signup__bg {
+    background-color: white;
+    height: 92vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
