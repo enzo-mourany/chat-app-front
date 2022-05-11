@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Container, Form, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './signup.css';
+import profileImg from '../assets/profileImg.jpg';
 
 
 
@@ -29,7 +30,7 @@ function Signup() {
         data.append('file', image);
         data.append('upload_preset', 'gbpldjbd');
         try {
-            setUploadImg(true);
+            setUploadingImg(true);
             let res = await fetch("https://api.cloudinary.com/v1_1/dpismhqss/image/upload", {
                 method: "post",
                 body: data,
@@ -43,10 +44,12 @@ function Signup() {
         }
     }
 
-    function handleSignup(e) {
+    async function handleSignup(e) {
         e.preventDefault();
         if (!image) return alert('Please upload your profile picture');
         const url = await uploadImage(image);
+        console.log(url);
+        // signup the user
     }
 
     return (
@@ -56,7 +59,7 @@ function Signup() {
                     <Form style={{ width: '80%', maxWidth: 500 }} onSubmit={handleSignup} >
                         <h1 className="text-center">Create account</h1>
                         <div className="signup-profile-pic__container">
-                            <img src={imagePreview || botImg} className="signup-profile-pic" />
+                            <img src={imagePreview || profileImg} className="signup-profile-pic" />
                             <label htmlFor="image-upload" className="image-upload-label">
                                 <i className="fas fa-plus-circle add-picture-icon"></i>
                             </label>
@@ -79,7 +82,7 @@ function Signup() {
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Create account
+                            {uploadingImg ? "Signing you up..." : "Signup"}
                         </Button>
                         <div className="py-4">
                             <p className="text-center">
