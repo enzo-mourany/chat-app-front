@@ -27,7 +27,20 @@ function Signup() {
     async function uploadImage() {
         const data = new FormData();
         data.append('file', image);
-        data.append('upload_preset', 'l7bcejcu');
+        data.append('upload_preset', 'gbpldjbd');
+        try {
+            setUploadImg(true);
+            let res = await fetch("https://api.cloudinary.com/v1_1/dpismhqss/image/upload", {
+                method: "post",
+                body: data,
+            });
+            const urlData = await res.json();
+            setUploadingImg(false);
+            return urlData.url;
+        } catch (error) {
+            setUploadingImg(false);
+            console.log(error);
+        }
     }
 
     function handleSignup(e) {
